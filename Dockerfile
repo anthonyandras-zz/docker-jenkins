@@ -10,12 +10,14 @@ RUN echo "deb http://apt.dockerproject.org/repo debian-jessie main" \
       && apt-get install -y sudo \
       && apt-get install -y docker-engine \
       && rm -rf /var/lib/apt/lists/*
+
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # install docker compose which will be used to build and run images
-RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/\
-    docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
-    chmod +x /usr/local/bin/docker-compose
+RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; chmod +x /usr/local/bin/docker-compose 
+
+# add a check to see if docker-compose is working
+#RUN docker-compose --help
 
 USER jenkins
 
