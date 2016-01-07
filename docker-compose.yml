@@ -1,0 +1,15 @@
+# this approach is still flawed as it requires jenkins to be built 
+# in order for the docker container to be built.
+
+jenkins:
+  build: .
+  container_name: anthonyandras/jenkins
+  ports:
+    - "8080:8080"
+  volumes_from:
+    - jenkins-data-container 
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+jenkins-data-container:
+  image: anthonyandras/jenkins
